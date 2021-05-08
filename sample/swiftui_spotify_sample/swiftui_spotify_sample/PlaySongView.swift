@@ -18,7 +18,7 @@ struct PlaySongView: View, IItemView {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
             Button("Back"){
                 self.listener?.pop()
             }.frame(height: 50)
@@ -46,7 +46,7 @@ struct PlaySongView: View, IItemView {
                     }))
             }.frame(height: 20).padding()
             Text("\(model.timeElapsedString)").foregroundColor(Color.white).font(.system(size: 18)).bold()
-            HStack(spacing: 40) {
+            HStack(alignment: .center, spacing: 40) {
                 Button(action: {
                     print("Rewind")
                 }) {

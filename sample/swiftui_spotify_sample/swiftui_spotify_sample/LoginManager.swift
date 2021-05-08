@@ -62,6 +62,7 @@ class LoginManager {
                 print("error!")
             }
             self.networkService.setupToken(token: session?.accessToken ?? "")
+            self.preparePlayer()
             self.safariVC?.dismiss(animated: true, completion: nil)
             self.delegate?.loginManagerDidLoginWithSuccess()
         })
