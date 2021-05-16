@@ -9,22 +9,20 @@ import SwiftUI
 import SwiftUINavigator
 
 struct LoginView: View, IItemView {
-    var listener: INavigationContainer?
+    var listener: INavigationContainer? = nil 
     
-    @ObservedObject var model = LoginModel()
+    @ObservedObject var model: LoginModel
     var body: some View {
         if model.isLogin {
-            self.listener?.push(view: SongSearchView())
+            self.listener?.push(view: ViewConfigurator.shared.makeSongSearchView())
         }
-       return LargeButton(title: "Login"){
+        return VStack { LargeButton(title: "Login"){
             self.model.login()
         }
-    }
-}
-
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
+        }.frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .center
+        ).background(Color.black)
     }
 }

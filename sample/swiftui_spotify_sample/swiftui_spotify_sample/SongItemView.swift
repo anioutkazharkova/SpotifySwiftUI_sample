@@ -13,8 +13,7 @@ struct SongItemView: View {
     
     var body: some View {
         HStack(alignment: .top) {
-            KFImage.url(URL(string: item.imageURL)!).resizable()
-                .aspectRatio(contentMode: .fit).scaledToFit()
+            CachedImage(path: item.imageURL, placeholder: UIImage(named: "music")!)
                       .frame(width: 150, height: 150, alignment: .topLeading)
                 
             VStack(alignment: .leading, spacing: 10) {

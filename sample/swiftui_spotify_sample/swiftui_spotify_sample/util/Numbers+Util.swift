@@ -20,6 +20,18 @@ extension TimeInterval {
 }
 
 extension Int {
+    var minuteSecondMS: String {
+        return String(format:"%d:%02d", minute, second)
+    }
+    var minute: Int {
+        return self/60
+    }
+    var second: Int {
+        return self%60
+    }
+}
+
+extension Int {
     var msToSeconds: Double {
         return Double(self) / 1000
     }

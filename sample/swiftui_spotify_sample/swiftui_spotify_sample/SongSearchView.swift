@@ -9,9 +9,9 @@ import SwiftUI
 import SwiftUINavigator
 
 struct SongSearchView: View,IItemView {
-    var listener: INavigationContainer?
+    var listener: INavigationContainer? = nil
     @State private var text: String = ""
-    @ObservedObject var model = SongSearchModel()
+    @ObservedObject var model: SongSearchModel
     
     var body: some View {
         VStack {
@@ -20,9 +20,9 @@ struct SongSearchView: View,IItemView {
         }
         ScrollView {
             LazyVStack(alignment: .leading) {
-                        ForEach(model.songs, id: \.self) { value in
-                            SongItemView(item: value).onTapGesture {
-                                self.listener?.push(view: PlaySongView(item: value))
+                ForEach(0..<model.songs.count, id: \.self) { index in
+                    SongItemView(item: model.songs[index]).onTapGesture {
+                        self.listener?.push(view: ViewConfigurator.shared.makePlaySongView(data: model.songs, currentIndex: index))
                             }
                         }
                     }
@@ -35,8 +35,3 @@ struct SongSearchView: View,IItemView {
     }
 }
 
-struct SongSearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SongSearchView()
-    }
-}

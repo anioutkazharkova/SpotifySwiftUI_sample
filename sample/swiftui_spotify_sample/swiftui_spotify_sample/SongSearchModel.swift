@@ -9,14 +9,17 @@ import Foundation
 import SwiftUI
 import Combine
 
-class SongSearchModel : ObservableObject {
+class SongSearchModel : ObservableObject, IModel {
     private var songService: SongsService = DI.shared.service.songService
     private var set: Set<AnyCancellable> = Set<AnyCancellable>()
     
     @Published var songs = [SongData]()
     
     func loadSongs(query: String) {
-       let _ = songService.searchSongs(query: query).sink(receiveCompletion: { (completion) in
+        if !query.isEmpty {
+            self.songs = [SongData]()
+        }
+        let _ = songService.searchSongs(query: query).sink(receiveCompletion: { (completion) in
             switch completion {
             case .finished:
                 print("finished")

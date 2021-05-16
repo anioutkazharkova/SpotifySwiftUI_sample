@@ -36,18 +36,25 @@ struct SearchBar:UIViewRepresentable {
         var action: ((String)->Void)?
         @Binding var text: String
         
+        private var timer: Timer?
+        
         init(text: Binding<String>) {
             _text = text
         }
         
         func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            text = searchText
-            action?(searchText)
+            timer?.invalidate()
+            self.text = searchText
+            timer = .scheduledTimer(withTimeInterval: 0.5, repeats: false) { [weak self] timer in
+                self?.action?(searchText)
+            }
+            
         }
         
         func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
             searchBar.resignFirstResponder()
             searchBar.endEditing(true)
+            self.action?(searchBar.text ?? "")
         }
         
         func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

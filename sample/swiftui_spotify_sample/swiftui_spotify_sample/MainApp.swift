@@ -10,10 +10,11 @@ import SwiftUINavigator
 
 @main
 struct MainApp: App {
+    var factory = ViewModelFactory()
     var body: some Scene {
         WindowGroup {
             NavigationContainerView(transition: .custom(.slide)) {
-             LoginView()
+                ViewConfigurator.shared.makeLoginView()
             }.onOpenURL { (url) in
                _ = LoginManager.shared.handled(url: url)
             }

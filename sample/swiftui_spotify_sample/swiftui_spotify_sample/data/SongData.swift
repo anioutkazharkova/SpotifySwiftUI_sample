@@ -27,6 +27,10 @@ struct SongData : Hashable {
     let durationInSeconds: Double
     let imageURL: String
     let songURL: String
+    
+    func titleText()->String {
+        return "\(self.artist) - \(self.name)"
+    }
 }
 
 struct  SongList : JsonDecodable{

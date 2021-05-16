@@ -7,8 +7,21 @@
 
 import Foundation
 
+protocol IModel : AnyObject {
+    
+}
+
 class ViewModelFactory {
-    func createModel(_ data: Any? = nil) {
-        
+    func makePlaySongModel(data: [SongData], currentIndex: Int)->PlaySongModel {
+        let items = data
+        return PlaySongModel(items: items, currentIndex: currentIndex)
+    }
+    
+    func makeSongSearchModel()->SongSearchModel {
+        return SongSearchModel()
+    }
+    
+    func makeLoginModel()->LoginModel {
+        return LoginModel()
     }
 }
